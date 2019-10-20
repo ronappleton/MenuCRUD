@@ -35,10 +35,11 @@ class MenuItem extends Model
     /**
      * Get all menu items, in a hierarchical collection.
      * Only supports 2 levels of indentation.
+     * @param $menuId
      */
-    public static function getTree()
+    public static function getTree($menuId)
     {
-        $menu = self::orderBy('lft')->get();
+        $menu = self::orderBy('lft')->where('menu_id', $menuId)->get();
 
         if ($menu->count()) {
             foreach ($menu as $k => $menu_item) {

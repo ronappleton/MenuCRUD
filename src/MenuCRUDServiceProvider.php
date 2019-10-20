@@ -37,7 +37,7 @@ class MenuCRUDServiceProvider extends ServiceProvider
     {
         // make menus available in views
         View::composer('*', NavigationViewComposer::class);
-        
+
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
         $this->publishes([__DIR__.'/config/menus.php' => config_path('menus.php'),]);
