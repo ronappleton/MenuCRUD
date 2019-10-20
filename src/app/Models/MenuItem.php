@@ -27,6 +27,11 @@ class MenuItem extends Model
         return $this->belongsTo('Backpack\PageManager\app\Models\Page', 'page_id');
     }
 
+    public function menu()
+    {
+        return $this->belongsTo();
+    }
+
     /**
      * Get all menu items, in a hierarchical collection.
      * Only supports 2 levels of indentation.

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateMenuItemsTable extends Migration
 {
@@ -12,8 +12,19 @@ class CreateMenuItemsTable extends Migration
      */
     public function up()
     {
+        Schema::create('menus', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 100);
+            $table->string('description', 255);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::dropIfExists('menu_items');
+
         Schema::create('menu_items', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('menu_id');
             $table->string('name', 100);
             $table->string('type', 20)->nullable();
             $table->string('link', 255)->nullable();
@@ -24,6 +35,8 @@ class CreateMenuItemsTable extends Migration
             $table->integer('depth')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('menu_id')->references('id')->on('menus');
         });
     }
 
