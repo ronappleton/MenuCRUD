@@ -29,7 +29,7 @@ class MenuItem extends Model
 
     public function menu()
     {
-        return $this->belongsTo();
+        return $this->belongsTo('Backpack\MenuCRUD\app\Models\Menu');
     }
 
     /**
