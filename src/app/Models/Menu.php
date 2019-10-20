@@ -5,7 +5,7 @@ namespace Backpack\MenuCRUD\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
-class Menu
+class Menu extends Model
 {
     use CrudTrait;
 
