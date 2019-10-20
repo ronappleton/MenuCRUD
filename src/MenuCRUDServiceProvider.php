@@ -4,6 +4,11 @@ namespace Backpack\MenuCRUD;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Backpack\MenuCRUD\app\Models\Menu;
+use Backpack\MenuCRUD\app\Models\MenuItem;
+use Backpack\MenuCRUD\app\Observers\MenuObserver;
+use Backpack\MenuCRUD\app\Observers\MenuItemObserver;
 
 class MenuCRUDServiceProvider extends ServiceProvider
 {
@@ -28,8 +33,14 @@ class MenuCRUDServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // make menus available in views
+        View::composer('*', 'App\Http\ViewComposers\NavigationViewComposer');
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
+        $this->publishes([__DIR__.'/config/menus.php' => config_path('menus.php'),]);
+
+        Menu::observe(MenuObserver::class);
+        MenuItem::observe(MenuItemObserver::class);
     }
 
     /**

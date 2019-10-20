@@ -12,9 +12,12 @@ class CreateMenuItemsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('menus');
+
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
+            $table->string('slug', 50);
             $table->string('description', 255);
             $table->timestamps();
             $table->softDeletes();

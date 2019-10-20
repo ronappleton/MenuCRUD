@@ -25,12 +25,27 @@ class MenuCrudController extends CrudController
                 'name' => 'name',
                 'label' => 'Label',
             ]);
+
+            $this->crud->addColumn([
+                'name' => 'slug',
+                'label' => 'Slug',
+            ]);
+
+            $this->crud->addColumn([
+                'name' => 'description',
+                'label' => 'Description',
+            ]);
         });
 
         $this->crud->operation(['create', 'update'], function () {
             $this->crud->addField([
                 'name' => 'name',
                 'label' => 'Label',
+            ]);
+
+            $this->crud->addField([
+                'name' => 'slug',
+                'label' => 'Slug',
             ]);
 
             $this->crud->addField([
