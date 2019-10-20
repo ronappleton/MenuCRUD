@@ -5,14 +5,17 @@ namespace Backpack\MenuCRUD;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Blade;
 use Backpack\MenuCRUD\app\Models\Menu;
 use Backpack\MenuCRUD\app\Models\MenuItem;
 use Backpack\MenuCRUD\app\Observers\MenuObserver;
 use Backpack\MenuCRUD\app\Observers\MenuItemObserver;
 use Backpack\MenuCRUD\app\Http\ViewComposers\NavigationViewComposer;
+use Illuminate\View\Compilers\Concerns;
 
 class MenuCRUDServiceProvider extends ServiceProvider
 {
+    use Concerns;
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -36,9 +39,15 @@ class MenuCRUDServiceProvider extends ServiceProvider
     {
         // make menus available in views
         View::composer('*', NavigationViewComposer::class);
+
+        Blade::directive('horizontalMenu', function ($menuSlug) {
+            return $this->compileInclude('vendor.backpack.menuCrud.horizontal_menu', ['menuItems' => $$menuSlug]);
+        });
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
         $this->publishes([__DIR__.'/config/menus.php' => config_path('menus.php'),]);
+        $this->publishes([__DIR__.'/resources/views/menus' => view_path('vendor/backpack/menuCrud'),
+        ]);
 
         if (config('menus.invalidated_caches')) {
             Menu::observe(MenuObserver::class);
@@ -74,4 +83,5 @@ class MenuCRUDServiceProvider extends ServiceProvider
     {
         $this->setupRoutes($this->app->router);
     }
+
 }
