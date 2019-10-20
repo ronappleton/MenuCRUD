@@ -14,7 +14,7 @@ class MenuCrudController extends CrudController
 
     public function setup()
     {
-        $this->crud->setModel("Backpack\MenuCRUD\app\Models\MenuItem");
+        $this->crud->setModel("Backpack\MenuCRUD\app\Models\Menu");
         $this->crud->setRoute(config('backpack.base.route_prefix').'/menu');
         $this->crud->setEntityNameStrings('menu', 'menus');
 
