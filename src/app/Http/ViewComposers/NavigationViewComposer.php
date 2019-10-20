@@ -2,6 +2,7 @@
 
 namespace Backpack\MenuCRUD\app\Http\ViewComposers;
 
+use Illuminate\Support\Facades\Cache;
 use Backpack\MenuCRUD\app\Models\Menu;
 use Illuminate\Database\Eloquent\Collection;
 
