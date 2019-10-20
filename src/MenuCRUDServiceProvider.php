@@ -45,7 +45,7 @@ class MenuCRUDServiceProvider extends ServiceProvider
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
         $this->publishes([__DIR__.'/config/menus.php' => config_path('menus.php'),]);
-        $this->publishes([__DIR__.'/resources/views/menus' => view_path('vendor/backpack/menuCrud'),
+        $this->publishes([__DIR__.'/resources/views/menus' => resource_path('views') . '/vendor/backpack/menuCrud',
         ]);
 
         if (config('menus.invalidated_caches')) {
