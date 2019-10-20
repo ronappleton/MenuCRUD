@@ -9,6 +9,7 @@ use Backpack\MenuCRUD\app\Models\Menu;
 use Backpack\MenuCRUD\app\Models\MenuItem;
 use Backpack\MenuCRUD\app\Observers\MenuObserver;
 use Backpack\MenuCRUD\app\Observers\MenuItemObserver;
+use Backpack\MenuCRUD\app\Http\ViewComposers\NavigationViewComposer;
 
 class MenuCRUDServiceProvider extends ServiceProvider
 {
@@ -34,7 +35,7 @@ class MenuCRUDServiceProvider extends ServiceProvider
     public function boot()
     {
         // make menus available in views
-        View::composer('*', 'Backpack\MenuCRUD\app\Http\ViewComposers\NavigationViewComposer');
+        View::composer('*', NavigationViewComposer::class);
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
         $this->publishes([__DIR__.'/config/menus.php' => config_path('menus.php'),]);
