@@ -11,7 +11,6 @@ use Backpack\MenuCRUD\app\Models\MenuItem;
 use Backpack\MenuCRUD\app\Observers\MenuObserver;
 use Backpack\MenuCRUD\app\Observers\MenuItemObserver;
 use Backpack\MenuCRUD\app\Http\ViewComposers\NavigationViewComposer;
-use Illuminate\View\Compilers\BladeCompiler;
 
 class MenuCRUDServiceProvider extends ServiceProvider
 {
@@ -34,19 +33,15 @@ class MenuCRUDServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(BladeCompiler $compiler)
+    public function boot()
     {
         // make menus available in views
         View::composer('*', NavigationViewComposer::class);
-
-        Blade::directive('horizontalMenu', function ($menuSlug) use ($compiler) {
-            return $compiler->compileInclude('vendor.backpack.menuCrud.horizontal_menu', ['menuItems' => $$menuSlug]);
-        });
+        
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
         $this->publishes([__DIR__.'/config/menus.php' => config_path('menus.php'),]);
-        $this->publishes([__DIR__.'/resources/views/menus' => resource_path('views') . '/vendor/backpack/menuCrud',
-        ]);
+        $this->loadViewsFrom(__DIR__.'/resources/views/menus', 'menucrud');
 
         if (config('menus.invalidated_caches')) {
             Menu::observe(MenuObserver::class);
