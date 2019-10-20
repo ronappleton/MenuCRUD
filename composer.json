@@ -1,5 +1,5 @@
 {
-    "name": "backpack/menucrud",
+    "name": "ronappleton/menucrud",
     "type": "library",
     "description": "An admin panel for menu items, using Backpack\\CRUD on Laravel 6.",
     "keywords": [
