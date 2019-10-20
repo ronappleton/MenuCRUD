@@ -11,7 +11,7 @@ use Backpack\MenuCRUD\app\Models\MenuItem;
 use Backpack\MenuCRUD\app\Observers\MenuObserver;
 use Backpack\MenuCRUD\app\Observers\MenuItemObserver;
 use Backpack\MenuCRUD\app\Http\ViewComposers\NavigationViewComposer;
-use Illuminate\View\Compilers\Concerns;
+use Illuminate\View\Compilers\BladeCompiler;
 
 class MenuCRUDServiceProvider extends ServiceProvider
 {
