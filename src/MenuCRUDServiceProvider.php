@@ -39,8 +39,10 @@ class MenuCRUDServiceProvider extends ServiceProvider
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
         $this->publishes([__DIR__.'/config/menus.php' => config_path('menus.php'),]);
 
-        Menu::observe(MenuObserver::class);
-        MenuItem::observe(MenuItemObserver::class);
+        if (config('menus.invalidated_caches')) {
+            Menu::observe(MenuObserver::class);
+            MenuItem::observe(MenuItemObserver::class);
+        }
     }
 
     /**
