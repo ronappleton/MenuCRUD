@@ -15,7 +15,6 @@ use Illuminate\View\Compilers\BladeCompiler;
 
 class MenuCRUDServiceProvider extends ServiceProvider
 {
-    use Concerns;
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -35,13 +34,13 @@ class MenuCRUDServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(BladeCompiler $compiler)
     {
         // make menus available in views
         View::composer('*', NavigationViewComposer::class);
 
-        Blade::directive('horizontalMenu', function ($menuSlug) {
-            return $this->compileInclude('vendor.backpack.menuCrud.horizontal_menu', ['menuItems' => $$menuSlug]);
+        Blade::directive('horizontalMenu', function ($menuSlug) use ($compiler) {
+            return $compiler->compileInclude('vendor.backpack.menuCrud.horizontal_menu', ['menuItems' => $$menuSlug]);
         });
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
