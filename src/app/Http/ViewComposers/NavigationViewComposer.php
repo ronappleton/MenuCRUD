@@ -26,7 +26,7 @@ class NavigationViewComposer
                 $menus = Menu::all();
 
                 $menus->each(static function (&$menu) {
-                    $menu->put('menu_items', MenuItem::getTree($menu->id));
+                    $menu->push('menu_items', MenuItem::getTree($menu->id));
                 });
             });
         }
