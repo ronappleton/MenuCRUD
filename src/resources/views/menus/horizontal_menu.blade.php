@@ -3,7 +3,7 @@
         <li class="nav-item">
             <a class="nav-link" href="{{$menuItem->url()}}">
                 @if($menuItem->icon)
-                    <i class="fa {{$menuItem->icon}}"></i>
+                    <i class="{{$menuItem->icon}}"></i>
                 @endif
                 <span>{{$menuItem->name}}</span>
             </a>
@@ -12,7 +12,7 @@
         <li class="nav-item dropdown">
             <a id="navbarDropdown-{{$menuItem->id}}" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @if($menuItem->icon)
-                    <i class="fa {{$menuItem->icon}}"></i>
+                    <i class="{{$menuItem->icon}}"></i>
                 @endif
                 <span>{{$menuItem->name}}</span>
             </a>
@@ -22,7 +22,7 @@
                         <li>
                             <a class="dropdown-item" href="{{$child->url()}}">
                                 @if($child->icon)
-                                    <i class="fa {{$child->icon}}"></i>
+                                    <i class="{{$child->icon}}"></i>
                                 @endif
                                 <span>{{$child->name}}</span>
                             </a>
@@ -32,7 +32,7 @@
                         <li class="dropdown-submenu">
                             <a id="dropdownMenu-{{$child->id}}" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @if($child->icon)
-                                    <i class="fa {{$child->icon}}"></i>
+                                    <i class="{{$child->icon}}"></i>
                                 @endif
                                 <span>{{$child->name}}</span>
                             </a>
@@ -40,7 +40,7 @@
                                 @foreach($child->children as $subChild)
                                     <a class="dropdown-item" href="{{$subChild->url()}}">
                                         @if($subChild->icon)
-                                            <i class="fa {{$subChild->icon}}"></i>
+                                            <i class="{{$subChild->icon}}"></i>
                                         @endif
                                         <span>{{$subChild->name}}</span>
                                     </a>

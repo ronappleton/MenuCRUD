@@ -15,7 +15,7 @@ class MenuItemCrudController extends CrudController
     public function setup()
     {
         $this->crud->setModel("Backpack\MenuCRUD\app\Models\MenuItem");
-        $this->crud->setRoute(config('backpack.base.route_prefix').'/menu-item');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/menu-item');
         $this->crud->setEntityNameStrings('menu item', 'menu items');
 
         $this->crud->enableReorder('name', 3);
@@ -65,6 +65,13 @@ class MenuItemCrudController extends CrudController
                 'label' => 'Type',
                 'type' => 'page_or_link',
                 'page_model' => '\Backpack\PageManager\app\Models\Page',
+            ]);
+
+            $this->crud->addField([
+                'label' => "Icon",
+                'name' => 'icon',
+                'type' => 'icon_picker',
+                'iconset' => 'fontawesome',
             ]);
         });
     }

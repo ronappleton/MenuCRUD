@@ -3,6 +3,7 @@
 namespace Backpack\MenuCRUD;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
@@ -41,7 +42,18 @@ class MenuCRUDServiceProvider extends ServiceProvider
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
         $this->publishes([__DIR__.'/config/menus.php' => config_path('menus.php'),]);
-        $this->loadViewsFrom(__DIR__.'/resources/views/menus', 'menucrud');
+
+        $viewPublishPath = resource_path('views') . '/vendor/backpack/menuCrud';
+        $viewModulePath = __DIR__.'/resources/views/menus';
+
+        $this->publishes([$viewModulePath => $viewPublishPath]);
+
+        if (File::isDirectory($viewPublishPath)) {
+            $this->loadViewsFrom($viewPublishPath, 'menucrud');
+        } else {
+            $this->loadViewsFrom($viewModulePath, 'menucrud');
+        }
+
 
         if (config('menus.invalidated_caches')) {
             Menu::observe(MenuObserver::class);

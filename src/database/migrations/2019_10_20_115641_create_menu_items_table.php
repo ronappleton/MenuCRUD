@@ -19,6 +19,7 @@ class CreateMenuItemsTable extends Migration
             $table->string('name', 100);
             $table->string('slug', 50);
             $table->string('description', 255);
+            $table->string('icon', 50)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

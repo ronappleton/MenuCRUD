@@ -11,9 +11,4 @@ class Menu extends Model
 
     protected $table = 'menus';
     protected $fillable = ['name', 'slug', 'description'];
-
-    public function menu_items()
-    {
-        return $this->hasMany('Backpack\MenuCRUD\app\Models\MenuItem', 'menu_id');
-    }
 }

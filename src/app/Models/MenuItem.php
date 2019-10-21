@@ -10,7 +10,7 @@ class MenuItem extends Model
     use CrudTrait;
 
     protected $table = 'menu_items';
-    protected $fillable = ['menu_id', 'name', 'type', 'link', 'page_id', 'parent_id'];
+    protected $fillable = ['menu_id', 'name', 'type', 'link', 'page_id', 'parent_id', 'icon'];
 
     public function parent()
     {
